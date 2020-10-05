@@ -1,0 +1,78 @@
+<div class="container">
+    <div *ngIf="!loading" class="row">
+        <div class="col-md-5 image-holder">
+            <div class="image-card smooth-shadow">
+                <div *ngFor="let media of phone.media; index as i" class="phone-image"
+                    [ngClass]="{'active': +activeImg === i}">
+                    <img [src]="media" alt="phone-image">
+                </div>
+                <div class="preview">
+                    <div *ngFor="let media of phone.media; index as i" class="phone-small-image"
+                        [ngClass]="{'active': +activeImg === i}" (click)="changeImage(i)">
+                        <img [src]="media" alt="phone-small-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md detail-holder">
+            <div class="detail-card smooth-shadow mb-3">
+                <h1>{{phone.title}}</h1>
+                <a [routerLink]="['/phones']" [queryParams]="{'brand': phone.brandId}"
+                    class="badge badge-secondary">{{phone.brand.name}}</a>
+                <h3>ფასი: {{phone.price}} ლარი</h3>
+            </div>
+            <div class="detail-table-card smooth-shadow">
+                <h5 class="mb-3">მახასიათებლები</h5>
+                <table class="table table-bordered mb-0">
+                    <tbody>
+                        <tr>
+                            <th scope="row">მწარმოებელი:</th>
+                            <td>{{phone.brand.name}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">ოპერატიული მეხსიერება:</th>
+                            <td>{{phone.ram}} GB</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">შიდა მეხსიერება:</th>
+                            <td>{{phone.memory}} GB</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">ეკრანის ზომა:</th>
+                            <td>{{phone.screenSize}} inches</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">ეკრანის რეზოლუცია:</th>
+                            <td>{{phone.screenResolution}} pixels</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">ზომები:</th>
+                            <td>{{phone.size}} mm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">წონა:</th>
+                            <td>{{phone.weight}} g</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">ოპერატიული სისტემა:</th>
+                            <td>{{phone.os}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">პროცესორი:</th>
+                            <td>{{phone.cpu}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="loading">
+        <div class="col">
+            <div class="d-flex justify-content-center my-5">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row">
+        <aside class="filter col-md-3">
+            <form [formGroup]="filterForm" (ngSubmit)="onSubmit()" class="smooth-shadow">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="search" placeholder="დასახელება"
+                        formControlName="searchTerm">
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="brands" formControlName="brand">
+                        <option value="0" selected>მწარმოებელი</option>
+                        <option *ngFor="let item of brands" [value]="item.id">{{item.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group form-row">
+                    <div class="col">
+                        <input type="number" class="form-control" placeholder="ფასი - დან" formControlName="priceLow">
+                    </div>
+                    <span>-</span>
+                    <div class="col">
+                        <input type="number" class="form-control" placeholder="ფასი - მდე" formControlName="priceHigh">
+                    </div>
+                </div>
+                <input type="submit" class="btn m-btn" value="ძებნა" />
+            </form>
+        </aside>
+        <div class="phones col-md">
+            <div class="row" *ngIf="!loading">
+                <app-phone *ngFor="let item of phones" [data]="item" class="col-12 col-md-6 col-lg-4 mb-4"></app-phone>
+            </div>
+            <div *ngIf="loading" class="d-flex justify-content-center my-5">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <ngb-pagination [collectionSize]="+count" [(page)]="page" [(pageSize)]="pageSize" [maxSize]="5"
+                [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="pageChange()"></ngb-pagination>
+        </div>
+    </div>
+</div>
